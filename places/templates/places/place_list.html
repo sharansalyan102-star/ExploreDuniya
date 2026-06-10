@@ -58,6 +58,27 @@
                         {% endfor %}
 
                     </ul>
+                    <hr>
+
+<h3>Stay Options 🏨</h3>
+
+<ul>
+
+    {% for stay in place.stay_set.all %}
+
+        <li>
+            {{ stay.name }}
+            -
+            ₹{{ stay.price_per_night }}/night
+        </li>
+
+    {% empty %}
+
+        <li>No stay options added.</li>
+
+    {% endfor %}
+
+</ul>
 
                 </div>
 
