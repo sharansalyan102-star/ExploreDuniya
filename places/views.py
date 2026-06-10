@@ -23,3 +23,9 @@ def place_detail(request, place_id):
         'places/place_detail.html',
         {'place': place}
     )
+def home(request):
+    return render(
+        request,
+        'places/home.html'
+    )
+    
