@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ place.name }}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+
+    <h1>{{ place.name }}</h1>
+
+    <p>
+        <strong>State:</strong>
+        {{ place.state }}
+    </p>
+
+    <p>
+        {{ place.description }}
+    </p>
+
+    <hr>
+
+    <h3>Food Spots 🍜</h3>
+
+    <ul>
+
+        {% for food in place.foodspot_set.all %}
+
+            <li>
+                {{ food.name }}
+                -
+                {{ food.special_food }}
+                -
+                ₹{{ food.price }}
+            </li>
+
+        {% empty %}
+
+            <li>No food spots added.</li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+</body>
+</html>

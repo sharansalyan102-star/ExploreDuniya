@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ExploreDuniya</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-4">
+        ExploreDuniya 🌍
+    </h1>
+
+    <div class="row">
+
+        {% for place in places %}
+
+        <div class="col-md-6 mb-4">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h3>
+    <a href="/places/{{ place.id }}/">
+        {{ place.name }}
+    </a>
+</h3>
+                    <p>
+                        <strong>State:</strong>
+                        {{ place.state }}
+                    </p>
+
+                    <p>
+                        {{ place.description }}
+                    </p>
+
+                    <h5>Food Spots 🍜</h5>
+
+                    <ul>
+
+                        {% for food in place.foodspot_set.all %}
+
+                            <li>
+                                {{ food.name }}
+                                -
+                                {{ food.special_food }}
+                                -
+                                ₹{{ food.price }}
+                            </li>
+
+                        {% empty %}
+
+                            <li>No food spots added yet.</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

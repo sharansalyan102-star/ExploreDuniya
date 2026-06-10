@@ -7,3 +7,19 @@ class Place(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class FoodSpot(models.Model):
+    place = models.ForeignKey(
+        Place,
+        on_delete=models.CASCADE
+    )
+
+    name = models.CharField(max_length=100)
+
+    special_food = models.CharField(max_length=100)
+
+    price = models.IntegerField()
+
+    def __str__(self):
+        return self.name
