@@ -31,5 +31,17 @@ class Stay(models.Model):
 
     description = models.TextField()
 
+class Review(models.Model):
+    place = models.ForeignKey(
+        Place,
+        on_delete=models.CASCADE
+    )
+
+    user_name = models.CharField(max_length=100)
+
+    rating = models.IntegerField()
+
+    comment = models.TextField()
+
     def __str__(self):
-        return self.name
+        return self.user_name    

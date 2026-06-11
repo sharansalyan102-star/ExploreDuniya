@@ -43,6 +43,40 @@
         {% endfor %}
 
     </ul>
+    <hr>
+
+<hr>
+
+<h3>Reviews ⭐</h3>
+
+{% for review in place.review_set.all %}
+
+<div class="card mb-3">
+
+    <div class="card-body">
+
+        <h5>
+           {{ review.user_name }}
+
+{% if review.user_name == "Sharan" %}
+    🚶 Traveler
+{% endif %}
+            ({{ review.rating }}/5)
+        </h5>
+
+        <p>
+            {{ review.comment }}
+        </p>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<p>No reviews yet.</p>
+
+{% endfor %}
 
 </div>
 
