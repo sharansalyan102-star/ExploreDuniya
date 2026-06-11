@@ -38,4 +38,29 @@ def home(request):
         'places/home.html',
         {'places': places}
     )
+def category_places(request, category):
+
+    places = Place.objects.filter(
+        category=category
+    )
+
+    return render(
+        request,
+        'places/place_list.html',
+        {'places': places}
+    )
+def category_places(request, category):
+
+    places = Place.objects.filter(
+        category=category
+    )
+
+    return render(
+    request,
+    'places/place_list.html',
+    {
+        'places': places,
+        'category': category
+    }
+)
     
