@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Place, FoodSpot, Stay, Review
+from .models import Place, Review
 
 def place_list(request):
 
@@ -19,16 +19,31 @@ def place_list(request):
     )
 
 
+from django.shortcuts import render, get_object_or_404, redirect
+
 def place_detail(request, place_id):
-    place = get_object_or_404(
-        Place,
-        id=place_id
-    )
+    place = get_object_or_404(Place, id=place_id)
+
+    if request.method == "POST":
+        user_name = request.POST.get("user_name")
+        rating = request.POST.get("rating")
+        comment = request.POST.get("comment")
+
+        Review.objects.create(
+            place=place,
+            user_name=user_name,
+            rating=rating,
+            comment=comment
+        )
+
+        return redirect("place_detail", place_id=place.id)
 
     return render(
         request,
-        'places/place_detail.html',
-        {'place': place}
+        "places/place_detail.html",
+        {
+            "place": place,
+        },
     )
 def home(request):
     places = Place.objects.all()[:3]

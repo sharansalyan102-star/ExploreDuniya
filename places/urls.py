@@ -20,4 +20,9 @@ urlpatterns = [
         'places/<int:place_id>/',
         place_detail
     ),
+    path(
+    "places/<int:place_id>/",
+    place_detail,
+    name="place_detail",
+),
 ]
