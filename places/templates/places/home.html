@@ -1,149 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>ExploreDuniya</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExploreDuniya 🌍</title>
 
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
 
-            <a class="navbar-brand" href="/">
-                ExploreDuniya 🌍
-            </a>
-
-            <div class="navbar-nav">
-                <a class="nav-link" href="/places/">
-                    Places
-                </a>
-            </div>
-
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <div class="container text-center mt-5">
-
-        <h1 class="display-3 fw-bold">
-            Explore Hidden Gems of India 🌍
-        </h1>
-
-        <p class="lead mt-3">
-            Discover authentic food, trusted stays and local experiences.
-        </p>
-
-        <a href="/places/" class="btn btn-primary btn-lg mt-3">
-            Explore Places
+        <a class="navbar-brand fw-bold" href="/">
+            🌍 ExploreDuniya
         </a>
 
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link text-white" href="/">🏠 Home</a>
+            <a class="nav-link text-white" href="/places/">🌍 All Places</a>
+        </div>
+
     </div>
+</nav>
 
-    <!-- Categories -->
-    <div class="container mt-5">
-        <h1>{{ category }} Places</h1>
+<!-- Hero Section -->
+<div class="container text-center mt-5">
 
-        <h2 class="text-center mb-4">
-            Choose Your Interest
-        </h2>
+    <h1 class="display-4 fw-bold">
+        Welcome to ExploreDuniya 🌍
+    </h1>
 
-        <div class="row text-center">
+    <p class="lead">
+        Discover hidden gems, delicious food, comfortable stays, and unforgettable experiences.
+    </p>
 
-            <div class="col-md-4 mb-3">
-                <a href="/places/category/Forest/"
-                   class="btn btn-success w-100">
-                    🌲 Forest
-                </a>
-            </div>
+    <a href="/places/" class="btn btn-primary btn-lg mt-3">
+        Explore Places
+    </a>
 
-            <div class="col-md-4 mb-3">
-                <a href="/places/category/Mountain/"
-                   class="btn btn-secondary w-100">
-                    ⛰️ Mountain
-                </a>
-            </div>
+</div>
 
-            <div class="col-md-4 mb-3">
-                <a href="/places/category/Temple/"
-                   class="btn btn-warning w-100">
-                    🛕 Temple
-                </a>
-            </div>
+<!-- Categories -->
+<div class="container mt-5">
 
-            <div class="col-md-4 mb-3">
-                <a href="/places/category/Beach/"
-                   class="btn btn-info w-100">
-                    🏖️ Beach
-                </a>
-            </div>
+    <h2 class="text-center mb-4">
+        Explore by Category
+    </h2>
 
-            <div class="col-md-4 mb-3">
-                <a href="/places/category/Waterfall/"
-                   class="btn btn-primary w-100">
-                    🌊 Waterfall
-                </a>
-            </div>
+    <div class="row g-3">
 
-            <div class="col-md-4 mb-3">
-                <a href="/places/category/Historical/"
-                   class="btn btn-dark w-100">
-                    🏛️ Historical
-                </a>
-            </div>
+        <div class="col-md-4">
+            <a href="/places/category/Forest/" class="btn btn-success w-100">
+                🌲 Forest
+            </a>
+        </div>
 
+        <div class="col-md-4">
+            <a href="/places/category/Mountain/" class="btn btn-secondary w-100">
+                ⛰️ Mountain
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/places/category/Temple/" class="btn btn-warning w-100">
+                🛕 Temple
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/places/category/Beach/" class="btn btn-info w-100">
+                🏖️ Beach
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/places/category/Waterfall/" class="btn btn-primary w-100">
+                🌊 Waterfall
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/places/category/Historical/" class="btn btn-dark w-100">
+                🏛️ Historical
+            </a>
         </div>
 
     </div>
 
-    <!-- Featured Places -->
-    <div class="container mt-5">
+</div>
 
-        <h2 class="text-center mb-4">
-            Featured Places 🌍
-        </h2>
+<!-- Featured Places -->
+<div class="container mt-5">
 
-        <div class="row">
+    <h2 class="text-center mb-4">
+        Featured Places ⭐
+    </h2>
 
-            {% for place in places %}
+    <div class="row">
 
-            <div class="col-md-4 mb-3">
+        {% for place in places %}
 
-                <div class="card shadow">
+        <div class="col-md-4 mb-4">
 
-                    <div class="card-body">
+            <div class="card shadow h-100">
 
-                        <h4>{{ place.name }}</h4>
+                <div class="card-body">
 
-                        <p>
-                            <strong>Category:</strong>
-                            {{ place.category }}
-                        </p>
+                    <h4>{{ place.name }}</h4>
 
-                        <p>
-                            {{ place.description }}
-                        </p>
+                    <p>
+                        <strong>Category:</strong> {{ place.category }}
+                    </p>
 
-                        <a href="/places/{{ place.id }}/"
-                           class="btn btn-primary">
+                    <p>
+                        <strong>State:</strong> {{ place.state }}
+                    </p>
 
-                            View Details
+                    <p>
+                        {{ place.description }}
+                    </p>
 
-                        </a>
-
-                    </div>
+                    <a href="/places/{{ place.id }}/" class="btn btn-outline-primary">
+                        View Details
+                    </a>
 
                 </div>
 
             </div>
 
-            {% endfor %}
-
         </div>
 
+        {% empty %}
+
+        <div class="col-12 text-center">
+            <p>No places available.</p>
+        </div>
+
+        {% endfor %}
+
     </div>
+
+</div>
 
 </body>
 </html>
