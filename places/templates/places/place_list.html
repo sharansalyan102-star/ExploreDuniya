@@ -33,18 +33,61 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/">🌍 ExploreDuniya</a>
 
-        <div class="navbar-nav ms-auto">
-            <a class="nav-link text-white" href="/">🏠 Home</a>
-            <a class="nav-link text-white" href="/places/">🌍 All Places</a>
+        <a class="navbar-brand fw-bold" href="/">
+            🌍 ExploreDuniya
+        </a>
+
+        <div class="navbar-nav ms-auto align-items-center">
+
+            <a class="nav-link text-white" href="/">
+                🏠 Home
+            </a>
+
+            <a class="nav-link text-white" href="/places/">
+                🌍 All Places
+            </a>
+
+            {% if user.is_authenticated %}
+
+                <a class="nav-link text-warning fw-bold" href="/suggest-place/">
+                    ➕ Suggest a Place
+                </a>
+
+                <span class="nav-link text-info">
+                    👋 {{ user.username }}
+                </span>
+
+                <form action="/accounts/logout/" method="post" class="ms-2">
+                    {% csrf_token %}
+                    <button class="btn btn-sm btn-danger" type="submit">
+                        🚪 Logout
+                    </button>
+                </form>
+
+            {% else %}
+
+                <a class="nav-link text-white" href="/accounts/login/">
+                    🔐 Login
+                </a>
+
+                <a class="nav-link text-white" href="/register/">
+                    📝 Register
+                </a>
+
+            {% endif %}
+
         </div>
+
     </div>
 </nav>
 
 <!-- Page Heading -->
 <div class="container mt-5 mb-4 text-center">
-    <h1 class="fw-bold text-primary">🌍 Explore Places</h1>
+
+    <h1 class="fw-bold text-primary">
+        🌍 Explore Places
+    </h1>
 
     {% if category %}
         <p class="text-muted">
@@ -55,6 +98,7 @@
             Discover amazing destinations across India.
         </p>
     {% endif %}
+
 </div>
 
 <!-- Search -->
@@ -88,39 +132,27 @@
     <div class="row g-2">
 
         <div class="col-md-2">
-            <a href="/places/category/Forest/" class="btn btn-success w-100">
-                🌲 Forest
-            </a>
+            <a href="/places/category/Forest/" class="btn btn-success w-100">🌲 Forest</a>
         </div>
 
         <div class="col-md-2">
-            <a href="/places/category/Mountain/" class="btn btn-secondary w-100">
-                ⛰️ Mountain
-            </a>
+            <a href="/places/category/Mountain/" class="btn btn-secondary w-100">⛰️ Mountain</a>
         </div>
 
         <div class="col-md-2">
-            <a href="/places/category/Temple/" class="btn btn-warning w-100">
-                🛕 Temple
-            </a>
+            <a href="/places/category/Temple/" class="btn btn-warning w-100">🛕 Temple</a>
         </div>
 
         <div class="col-md-2">
-            <a href="/places/category/Beach/" class="btn btn-info w-100">
-                🏖️ Beach
-            </a>
+            <a href="/places/category/Beach/" class="btn btn-info w-100">🏖️ Beach</a>
         </div>
 
         <div class="col-md-2">
-            <a href="/places/category/Waterfall/" class="btn btn-primary w-100">
-                🌊 Waterfall
-            </a>
+            <a href="/places/category/Waterfall/" class="btn btn-primary w-100">🌊 Waterfall</a>
         </div>
 
         <div class="col-md-2">
-            <a href="/places/category/Historical/" class="btn btn-dark w-100">
-                🏛️ Historical
-            </a>
+            <a href="/places/category/Historical/" class="btn btn-dark w-100">🏛️ Historical</a>
         </div>
 
     </div>
@@ -178,9 +210,7 @@
 
                         {% for food in place.foodspot_set.all %}
 
-                            <li>
-                                {{ food.name }}
-                            </li>
+                            <li>{{ food.name }}</li>
 
                         {% empty %}
 
@@ -225,9 +255,11 @@
 
 <!-- Footer -->
 <footer class="bg-dark text-white text-center py-3 mt-5">
+
     <div class="container">
         © 2026 ExploreDuniya | Made with ❤️ by Sharan
     </div>
+
 </footer>
 
 </body>

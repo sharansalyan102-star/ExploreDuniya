@@ -35,20 +35,57 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-        <div class="container">
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <div class="container">
 
-            <a class="navbar-brand fw-bold" href="/">
-                🌍 ExploreDuniya
+        <a class="navbar-brand fw-bold" href="/">
+            🌍 ExploreDuniya
+        </a>
+
+        <div class="navbar-nav ms-auto align-items-center">
+
+            <a class="nav-link text-white" href="/">
+                🏠 Home
             </a>
 
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link text-white" href="/">🏠 Home</a>
-                <a class="nav-link text-white" href="/places/">🌍 All Places</a>
-            </div>
+            <a class="nav-link text-white" href="/places/">
+                🌍 All Places
+            </a>
+
+            {% if user.is_authenticated %}
+
+                <a class="nav-link text-warning fw-bold" href="/suggest-place/">
+                    ➕ Suggest a Place
+                </a>
+
+                <span class="nav-link text-info">
+                    👋 Welcome, {{ user.username }}
+                </span>
+
+                <form action="/accounts/logout/" method="post" class="ms-2">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        🚪 Logout
+                    </button>
+                </form>
+
+            {% else %}
+
+                <a class="nav-link text-white" href="/accounts/login/">
+                    🔐 Login
+                </a>
+
+                <a class="nav-link text-white" href="/register/">
+                    📝 Register
+                </a>
+
+            {% endif %}
 
         </div>
-    </nav>
+
+    </div>
+</nav>
 
     <!-- Hero Section -->
     <div class="container hero text-center">
@@ -67,6 +104,20 @@
         </a>
 
     </div>
+    <div class="alert alert-success text-center mt-4">
+    <h4>🌟 Know an amazing place?</h4>
+    <p>Help fellow travelers by suggesting hidden gems across India!</p>
+
+    {% if user.is_authenticated %}
+        <a href="/suggest-place/" class="btn btn-warning">
+            ➕ Suggest a Place
+        </a>
+    {% else %}
+        <a href="/accounts/login/" class="btn btn-primary">
+            🔐 Login to Suggest
+        </a>
+    {% endif %}
+</div>
 
     <!-- Categories -->
     <div class="container mb-5">

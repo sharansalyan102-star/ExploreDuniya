@@ -1,6 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
-from .models import Place, Review
+from django.contrib.auth.decorators import login_required
+
+from .models import (
+    Place,
+    Review,
+    PlaceSuggestion,
+)
 
 
 # -------------------------
@@ -98,4 +104,27 @@ def place_detail(request, place_id):
         {
             "place": place,
         },
+    )
+@login_required
+def suggest_place(request):
+    if request.method == "POST":
+        PlaceSuggestion.objects.create(
+            user=request.user,
+            name=request.POST.get("name"),
+            state=request.POST.get("state"),
+            district=request.POST.get("district"),
+            taluk=request.POST.get("taluk"),
+            category=request.POST.get("category"),
+            description=request.POST.get("description"),
+            image=request.FILES.get("image"),
+        )
+
+        return render(
+            request,
+            "places/suggest_success.html",
+        )
+
+    return render(
+        request,
+        "places/suggest_place.html",
     )
