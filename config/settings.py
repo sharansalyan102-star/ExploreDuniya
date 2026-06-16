@@ -13,7 +13,7 @@ SECRET_KEY = "django-insecure-u%xlnm7ma^q7t)lwm0z4w)-sr@uiszq=x#01jc9w7!x#mj6o^c
 # Change to False after deployment is working
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["exploreduniya.onrender.com",]
 
 # Applications
 INSTALLED_APPS = [
