@@ -106,24 +106,57 @@
 
     <form method="GET">
 
-        <div class="input-group">
+    <div class="row g-2">
 
+        <div class="col-md-4">
             <input
                 type="text"
                 name="q"
                 class="form-control"
-                placeholder="🔍 Search places..."
+                placeholder="🔍 Search..."
                 value="{{ request.GET.q }}"
             >
-
-            <button class="btn btn-primary" type="submit">
-                Search
-            </button>
-
         </div>
 
-    </form>
+        <div class="col-md-3">
+            <select name="district" class="form-select">
+                <option value="">All Districts</option>
 
+                {% for d in districts %}
+                    <option
+                        value="{{ d }}"
+                        {% if request.GET.district == d %}selected{% endif %}
+                    >
+                        {{ d }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <select name="taluk" class="form-select">
+                <option value="">All Taluks</option>
+
+                {% for t in taluks %}
+                    <option
+                        value="{{ t }}"
+                        {% if request.GET.taluk == t %}selected{% endif %}
+                    >
+                        {{ t }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">
+                Filter
+            </button>
+        </div>
+
+    </div>
+
+</form>
 </div>
 
 <!-- Category Buttons -->
@@ -197,6 +230,17 @@
                         <strong>📍 State:</strong>
                         {{ place.state }}
                     </p>
+                    
+
+<p>
+    <strong>🏙️ District:</strong>
+    {{ place.district }}
+</p>
+
+<p>
+    <strong>🗺️ Taluk:</strong>
+    {{ place.taluk }}
+</p>
 
                     <p>
                         {{ place.description|truncatewords:20 }}

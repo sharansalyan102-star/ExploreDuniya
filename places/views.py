@@ -49,22 +49,50 @@ def register(request):
 # -------------------------
 # Place List
 # -------------------------
+from django.db.models import Q
+
 def place_list(request):
     query = request.GET.get("q")
+    district = request.GET.get("district")
+    taluk = request.GET.get("taluk")
+
+    places = Place.objects.all()
 
     if query:
-        places = Place.objects.filter(name__icontains=query)
-    else:
-        places = Place.objects.all()
+        places = places.filter(
+            Q(name__icontains=query) |
+            Q(state__icontains=query) |
+            Q(district__icontains=query) |
+            Q(taluk__icontains=query)
+        )
+
+    if district:
+        places = places.filter(district__iexact=district)
+
+    if taluk:
+        places = places.filter(taluk__iexact=taluk)
+
+    districts = (
+        Place.objects.values_list("district", flat=True)
+        .distinct()
+        .order_by("district")
+    )
+
+    taluks = (
+        Place.objects.values_list("taluk", flat=True)
+        .distinct()
+        .order_by("taluk")
+    )
 
     return render(
         request,
         "places/place_list.html",
         {
             "places": places,
+            "districts": districts,
+            "taluks": taluks,
         },
     )
-
 
 # -------------------------
 # Category Filter
