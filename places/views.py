@@ -52,9 +52,7 @@ def register(request):
 from django.db.models import Q
 
 def place_list(request):
-    query = request.GET.get("q")
-    district = request.GET.get("district")
-    taluk = request.GET.get("taluk")
+    query = request.GET.get("q", "")
 
     places = Place.objects.all()
 
@@ -66,31 +64,12 @@ def place_list(request):
             Q(taluk__icontains=query)
         )
 
-    if district:
-        places = places.filter(district__iexact=district)
-
-    if taluk:
-        places = places.filter(taluk__iexact=taluk)
-
-    districts = (
-        Place.objects.values_list("district", flat=True)
-        .distinct()
-        .order_by("district")
-    )
-
-    taluks = (
-        Place.objects.values_list("taluk", flat=True)
-        .distinct()
-        .order_by("taluk")
-    )
-
     return render(
         request,
         "places/place_list.html",
         {
             "places": places,
-            "districts": districts,
-            "taluks": taluks,
+            "query": query,
         },
     )
 

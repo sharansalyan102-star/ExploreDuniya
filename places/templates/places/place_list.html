@@ -103,60 +103,20 @@
 
 <!-- Search -->
 <div class="container mb-4">
-
     <form method="GET">
-
-    <div class="row g-2">
-
-        <div class="col-md-4">
+        <div class="input-group">
             <input
                 type="text"
                 name="q"
                 class="form-control"
-                placeholder="🔍 Search..."
-                value="{{ request.GET.q }}"
+                placeholder="🔍 Search by place, district or taluk..."
+                value="{{ query }}"
             >
-        </div>
-
-        <div class="col-md-3">
-            <select name="district" class="form-select">
-                <option value="">All Districts</option>
-
-                {% for d in districts %}
-                    <option
-                        value="{{ d }}"
-                        {% if request.GET.district == d %}selected{% endif %}
-                    >
-                        {{ d }}
-                    </option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="col-md-3">
-            <select name="taluk" class="form-select">
-                <option value="">All Taluks</option>
-
-                {% for t in taluks %}
-                    <option
-                        value="{{ t }}"
-                        {% if request.GET.taluk == t %}selected{% endif %}
-                    >
-                        {{ t }}
-                    </option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-primary w-100">
-                Filter
+            <button class="btn btn-primary" type="submit">
+                Search
             </button>
         </div>
-
-    </div>
-
-</form>
+    </form>
 </div>
 
 <!-- Category Buttons -->
