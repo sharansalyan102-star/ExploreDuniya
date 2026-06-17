@@ -5,27 +5,41 @@ from django.contrib.auth.models import User
 class Place(models.Model):
 
     CATEGORY_CHOICES = [
-        ('Forest', 'Forest'),
-        ('Mountain', 'Mountain'),
-        ('Temple', 'Temple'),
-        ('Beach', 'Beach'),
-        ('Waterfall', 'Waterfall'),
-        ('Historical', 'Historical'),
-        ('Food', 'Food Destination'),
+        ("Forest", "Forest"),
+        ("Mountain", "Mountain"),
+        ("Temple", "Temple"),
+        ("Beach", "Beach"),
+        ("Waterfall", "Waterfall"),
+        ("Historical", "Historical"),
+        ("Food", "Food Destination"),
     ]
 
     name = models.CharField(max_length=100)
+
     state = models.CharField(max_length=100)
+
+    district = models.CharField(
+        max_length=100,
+        blank=True,
+        default=""
+    )
+
+    taluk = models.CharField(
+        max_length=100,
+        blank=True,
+        default=""
+    )
+
     description = models.TextField()
 
     category = models.CharField(
         max_length=50,
         choices=CATEGORY_CHOICES,
-        default='Forest'
+        default="Forest"
     )
 
     image = models.ImageField(
-        upload_to='places/',
+        upload_to="places/",
         blank=True,
         null=True
     )
@@ -42,7 +56,9 @@ class FoodSpot(models.Model):
     )
 
     name = models.CharField(max_length=100)
+
     special_food = models.CharField(max_length=100)
+
     price = models.IntegerField()
 
     def __str__(self):
@@ -57,7 +73,9 @@ class Stay(models.Model):
     )
 
     name = models.CharField(max_length=100)
+
     price_per_night = models.IntegerField()
+
     description = models.TextField()
 
     def __str__(self):
@@ -72,32 +90,31 @@ class Review(models.Model):
     )
 
     user_name = models.CharField(max_length=100)
+
     rating = models.IntegerField()
+
     comment = models.TextField()
 
     def __str__(self):
         return self.user_name
 
 
-# -----------------------------
-# NEW: Place Suggestion
-# -----------------------------
 class PlaceSuggestion(models.Model):
 
     CATEGORY_CHOICES = [
-        ('Forest', 'Forest'),
-        ('Mountain', 'Mountain'),
-        ('Temple', 'Temple'),
-        ('Beach', 'Beach'),
-        ('Waterfall', 'Waterfall'),
-        ('Historical', 'Historical'),
-        ('Food', 'Food Destination'),
+        ("Forest", "Forest"),
+        ("Mountain", "Mountain"),
+        ("Temple", "Temple"),
+        ("Beach", "Beach"),
+        ("Waterfall", "Waterfall"),
+        ("Historical", "Historical"),
+        ("Food", "Food Destination"),
     ]
 
     STATUS_CHOICES = [
-        ('Pending', 'Pending'),
-        ('Approved', 'Approved'),
-        ('Rejected', 'Rejected'),
+        ("Pending", "Pending"),
+        ("Approved", "Approved"),
+        ("Rejected", "Rejected"),
     ]
 
     user = models.ForeignKey(
@@ -126,7 +143,6 @@ class PlaceSuggestion(models.Model):
         null=True
     )
 
-    # NEW: Admin approval status
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
